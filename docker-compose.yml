@@ -1,0 +1,96 @@
+version: "3.9"
+
+services:
+  eureka-ms:
+    build: ./Eureka-server
+    networks:
+      backend:
+        ipv4_address: 172.20.0.10
+    image: eureka-ms
+    container_name: Eureka-ms
+    ports:
+      - "8761:8761"
+
+#-----
+  gateway-ms:
+    build: ./Gateway-ms
+    networks:
+       backend:
+          ipv4_address: 172.20.0.20
+    image: gateway-ms
+    container_name: Gateway-ms
+    ports:
+      - "8080:8080"
+
+  #-----
+  auth-ms:
+    build: ./Authentication-ms
+    networks:
+      backend:
+        ipv4_address: 172.20.0.30
+    image: auth-ms
+    container_name: Authentication-ms
+    ports:
+      - "8081:8081"
+
+  #-----
+  project-ms:
+    build: ./Project-ms
+    networks:
+      backend:
+        ipv4_address: 172.20.0.40
+    image: project-ms
+    container_name: Project-ms
+    ports:
+      - "8082:8082"
+
+  #-----
+  task-ms:
+    build: ./Task-ms
+    networks:
+      backend:
+        ipv4_address: 172.20.0.50
+    image: task-ms
+    container_name: Task-ms
+    ports:
+      - "8083:8083"
+
+  #-----
+  notif-ms:
+    build: ./Notification-ms
+    networks:
+      backend:
+        ipv4_address: 172.20.0.60
+    image: notif-ms
+    container_name: Notification-ms
+    ports:
+      - "8084:8084"
+
+
+  #-----
+  upload-ms:
+    build: ./Upload-ms
+    networks:
+      backend:
+        ipv4_address: 172.20.0.70
+    image: upload-ms
+    container_name: Upload-ms
+    ports:
+      - "8085:8085"
+
+
+
+
+
+networks:
+  backend:
+    # Use a custom driver which takes special options
+    driver: bridge
+    driver_opts:
+      foo: "3"
+      bar: "4"
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
