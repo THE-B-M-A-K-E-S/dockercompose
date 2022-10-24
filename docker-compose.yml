@@ -21,6 +21,8 @@ services:
     container_name: Gateway-ms
     ports:
       - "8080:8080"
+    depends_on:
+        - eureka-ms
 
   #-----
   auth-ms:
@@ -32,6 +34,9 @@ services:
     container_name: Authentication-ms
     ports:
       - "8081:8081"
+    depends_on:
+      - eureka-ms
+      - gateway-ms
 
   #-----
   project-ms:
@@ -43,6 +48,9 @@ services:
     container_name: Project-ms
     ports:
       - "8082:8082"
+    depends_on:
+      - eureka-ms
+      - gateway-ms
 
   #-----
   task-ms:
@@ -54,6 +62,9 @@ services:
     container_name: Task-ms
     ports:
       - "8083:8083"
+    depends_on:
+      - eureka-ms
+      - gateway-ms
 
   #-----
   notif-ms:
@@ -65,6 +76,9 @@ services:
     container_name: Notification-ms
     ports:
       - "8084:8084"
+    depends_on:
+      - eureka-ms
+      - gateway-ms
 
 
   #-----
@@ -77,6 +91,9 @@ services:
     container_name: Upload-ms
     ports:
       - "8085:8085"
+    depends_on:
+      - eureka-ms
+      - gateway-ms
 
 
 
